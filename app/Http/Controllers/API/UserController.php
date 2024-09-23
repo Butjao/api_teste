@@ -18,12 +18,18 @@ class UserController extends Controller
 
     public function pesquisaGeral() {
         $dados = Usuarios::get();
+        if(count($dados) == 0) {
+            return json_encode("Nenhum dado encontrado.");
+        }
         return json_encode($dados);
     }
 
     public function filtrar(Request $request) {
         return ($request->cd_pessoa);
         $dados = Usuarios::where('cd_pessoa', '=', $request->cd_pessoa)->get();
+        if(count($dados) == 0) {
+            return json_encode("Nenhum dado encontrado.");
+        }
         return json_encode($dados);
     }
 }
